@@ -6,10 +6,10 @@ public class PlayerMovement : MonoBehaviour
 {
     #region VARIABLES
     [Header("MOVEMENT")]
-    [SerializeField] float horizontalMove;
-    [SerializeField] float verticalMove;
+    float horizontalMove;
+    float verticalMove;
     private Vector3 playerInput;
-    public Vector3 movePlayer;
+    Vector3 movePlayer;
     private bool stopped = false;
 
     [SerializeField] CharacterController player;
@@ -51,17 +51,9 @@ public class PlayerMovement : MonoBehaviour
                 // GRAVITY
                 SetGravity();
 
-                // JUMP
-                PlayerSkills();
+                
 
                 // MOVING CHARACTER
-
-                if (player.isGrounded && !playerSteps.isPlaying && (prevPos.x != transform.position.x && prevPos.z != transform.position.z) && (playerInput.x + playerInput.z > 0.5f || playerInput.x + playerInput.z < -0.5f))
-                {
-                    prevPos = transform.position;
-                    playerSteps.Play();
-                    Destroy(Instantiate(walkinParticles, walkinParticlesSpawner.position, Quaternion.identity), 0.55f);
-                }
                 player.Move(movePlayer * Time.deltaTime);
 
             }
@@ -82,18 +74,6 @@ public class PlayerMovement : MonoBehaviour
 
         camForward = camForward.normalized;
         camRight = camRight.normalized;
-    }
-    #endregion
-
-    #region  PLAYER SKILLS
-    void PlayerSkills()
-    {
-        if (player.isGrounded && Input.GetButtonDown("Jump"))
-        {
-            fallVelocity = jumpForce;
-            movePlayer.y = fallVelocity;
-            jumpSound.Play();
-        }
     }
     #endregion
 
