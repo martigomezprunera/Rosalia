@@ -1,0 +1,117 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerMovement : MonoBehaviour
+{
+    #region VARIABLES
+    [Header("MOVEMENT")]
+    [SerializeField] float horizontalMove;
+    [SerializeField] float verticalMove;
+    private Vector3 playerInput;
+    public Vector3 movePlayer;
+    private bool stopped = false;
+
+    [SerializeField] CharacterController player;
+    [SerializeField] float playerSpeed;
+
+    [Header("GRAVITY")]
+    [SerializeField] float gravity = 9.8f;
+    [SerializeField] float fallVelocity;
+
+    [Header("CAMERA")]
+    [SerializeField] Camera mainCamera;
+    private Vector3 camForward;
+    private Vector3 camRight;
+    #endregion
+
+
+    #region UPDATE
+    void Update()
+    {
+            //GET AXIS
+            horizontalMove = Input.GetAxis("Horizontal");
+            verticalMove = Input.GetAxis("Vertical");
+
+            playerInput = new Vector3(horizontalMove, 0, verticalMove);
+            playerInput = Vector3.ClampMagnitude(playerInput, 1);
+
+            //GETTING CAMERA DIRECTION
+            CamDirection();
+
+            // CALCULATING CHARACTER MOVEMENT
+            movePlayer = playerInput.x * camRight + playerInput.z * camForward;
+            movePlayer *= playerSpeed;
+
+            if (!stopped)
+            {
+                // CHARACTER ROTATION (LOOK AT)
+                player.transform.LookAt(player.transform.position + movePlayer);
+
+                // GRAVITY
+                SetGravity();
+
+                // JUMP
+                PlayerSkills();
+
+                // MOVING CHARACTER
+
+                if (player.isGrounded && !playerSteps.isPlaying && (prevPos.x != transform.position.x && prevPos.z != transform.position.z) && (playerInput.x + playerInput.z > 0.5f || playerInput.x + playerInput.z < -0.5f))
+                {
+                    prevPos = transform.position;
+                    playerSteps.Play();
+                    Destroy(Instantiate(walkinParticles, walkinParticlesSpawner.position, Quaternion.identity), 0.55f);
+                }
+                player.Move(movePlayer * Time.deltaTime);
+
+            }
+        
+
+
+    }
+#endregion
+
+    #region CAMERA DIRECTION
+    void CamDirection()
+    {
+        camForward = mainCamera.transform.forward;
+        camRight = mainCamera.transform.right;
+
+        camForward.y = 0;
+        camRight.y = 0;
+
+        camForward = camForward.normalized;
+        camRight = camRight.normalized;
+    }
+    #endregion
+
+    #region  PLAYER SKILLS
+    void PlayerSkills()
+    {
+        if (player.isGrounded && Input.GetButtonDown("Jump"))
+        {
+            fallVelocity = jumpForce;
+            movePlayer.y = fallVelocity;
+            jumpSound.Play();
+        }
+    }
+    #endregion
+
+    #region SET GRAVITY
+    void SetGravity()
+    {
+
+        if (player.isGrounded)
+        {
+            fallVelocity = -gravity * Time.deltaTime;
+            movePlayer.y = fallVelocity;
+        }
+        else
+        {
+            fallVelocity -= gravity * Time.deltaTime;
+            movePlayer.y = fallVelocity;
+        }
+
+    }
+    #endregion
+}
