@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     float horizontalMove;
     float verticalMove;
     private Vector3 playerInput;
-    Vector3 movePlayer;
+    public Vector3 movePlayer;
     private bool stopped = false;
 
     [SerializeField] CharacterController player;
