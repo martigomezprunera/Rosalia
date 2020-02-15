@@ -12,14 +12,18 @@ public class Attack : MonoBehaviour
     }
 
     [Header("TRANSFORMS")]
+    [SerializeField] Transform player;
     [SerializeField] Transform centreOfAttack;
     [SerializeField] Transform rightSpawner;
     [SerializeField] Transform leftSpawner;
-    [SerializeField] PlayerMovement myPlayer;
+
+    [SerializeField] PlayerMovement myPlayerMovement;
+
     
     [Header("VARIABLES")]    
     [SerializeField] GameObject attackObject;
     [SerializeField] float speedAttack;
+    Quaternion lastRotation;
     float angleToRotate = 120;
     Side sideAttack = Side.RIGHT;
     bool canAttack = true;
@@ -27,7 +31,7 @@ public class Attack : MonoBehaviour
 
     #region UPDATE
     void Update()
-    {
+    {      
         //////Detectamos el input
         if (Input.GetButtonDown("Fire1") && canAttack)
         {
@@ -38,10 +42,15 @@ public class Attack : MonoBehaviour
                         ////Instanciar el ataque
                         Debug.Log("Right Attack");
                         Destroy(Instantiate(attackObject,rightSpawner), speedAttack);
-                        attackObject.transform.parent = rightSpawner;
+                        attackObject.transform.SetParent(rightSpawner);
 
                         ///rotar el brazo
-                        centreOfAttack.DORotate(new Vector3(0,  angleToRotate,0), speedAttack);
+                        ///
+                        lastRotation = centreOfAttack.rotation;
+                        centreOfAttack.DORotate(new Vector3(    centreOfAttack.rotation.eulerAngles.x, 
+                                                                centreOfAttack.rotation.eulerAngles.y + angleToRotate, 
+                                                                centreOfAttack.rotation.eulerAngles.z), 
+                                                                speedAttack);
 
                         ///coolDown
                         canAttack = false;
@@ -59,7 +68,10 @@ public class Attack : MonoBehaviour
                         attackObject.transform.parent = leftSpawner;
 
                         ///rotar el brazo
-                        centreOfAttack.DORotate(new Vector3(0, -angleToRotate, 0), speedAttack);
+                        centreOfAttack.DORotate(new Vector3(centreOfAttack.rotation.eulerAngles.x,
+                                                                centreOfAttack.rotation.eulerAngles.y - angleToRotate,
+                                                                centreOfAttack.rotation.eulerAngles.z),
+                                                                speedAttack);
 
                         ///coolDown
                         canAttack = false;
@@ -83,8 +95,8 @@ public class Attack : MonoBehaviour
     void RestartAttack()
     {
         canAttack = true;
-        centreOfAttack.Rotate(new Vector3(0, 0, 0));
-        
+        centreOfAttack.DORotate(player.rotation.eulerAngles,0.1f);
+        //centreOfAttack.rotation = lastRotation;
     }
     #endregion
    
