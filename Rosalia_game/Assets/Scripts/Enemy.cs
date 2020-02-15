@@ -48,8 +48,7 @@ public class Enemy : MonoBehaviour
                     if (!(Vector3.Distance(target.position, this.transform.position) < 3))
                     {
                         pathfinder.isStopped = false;
-                        myCoroutine = StartCoroutine(UpdatePath());                        
-                        Debug.Log("StartCorutine");
+                        myCoroutine = StartCoroutine(UpdatePath());   
                     }
                     else
                     {
@@ -61,7 +60,6 @@ public class Enemy : MonoBehaviour
             else if ((Vector3.Distance(target.position, this.transform.position) < distanceCanCharge) && !stop)
             {
                 StopCoroutine(myCoroutine);
-                Debug.Log("Stop Corutine");
                 stop = true;
                 pathfinder.isStopped=true;
                 auxTarget = target.position;
@@ -102,12 +100,10 @@ public class Enemy : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("ewdew");
+    {       
         if (collision.gameObject.tag == "Player")
         {
-            
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
 }
