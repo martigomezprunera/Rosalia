@@ -100,4 +100,14 @@ public class Enemy : MonoBehaviour
            
         }
     }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("ewdew");
+        if (collision.gameObject.tag == "Player")
+        {
+            
+            Destroy(this);
+        }
+    }
 }
