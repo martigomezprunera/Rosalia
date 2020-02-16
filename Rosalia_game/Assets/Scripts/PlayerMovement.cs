@@ -25,7 +25,6 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 camRight;
     #endregion
 
-
     #region UPDATE
     void Update()
     {
@@ -94,4 +93,15 @@ public class PlayerMovement : MonoBehaviour
 
     }
     #endregion
+
+    #region OnTriggerStay
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.tag == "Fardo")
+        {
+            Debug.Log("Wolcen esta caido");
+        }
+    }
+    #endregion
+
 }
