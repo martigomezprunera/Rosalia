@@ -23,6 +23,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Camera mainCamera;
     private Vector3 camForward;
     private Vector3 camRight;
+
+    [Header("RESPAWNMONEY")]
+    private int counterMoneyTake;
+    private int counterMoney;
+
     #endregion
 
     #region UPDATE
@@ -99,7 +104,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if(other.tag == "Fardo")
         {
-            Debug.Log("Wolcen esta caido");
+            counterMoneyTake++;
+            counterMoney++;
+            Debug.Log("Dinero cogido" + counterMoneyTake);
+            Debug.Log("Fardo siguiente" + counterMoney);
         }
     }
     #endregion
