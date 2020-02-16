@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] CharacterController player;
     [SerializeField] float playerSpeed;
 
+
     [Header("GRAVITY")]
     [SerializeField] float gravity = 9.8f;
     [SerializeField] float fallVelocity;
@@ -54,8 +55,6 @@ public class PlayerMovement : MonoBehaviour
 
                 // GRAVITY
                 SetGravity();
-
-                
 
                 // MOVING CHARACTER
                 player.Move(movePlayer * Time.deltaTime);
