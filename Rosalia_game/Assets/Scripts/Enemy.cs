@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour
     float countDownToAttack=1;
     float countDownToReset = 0.5f;
     Coroutine myCoroutine;
+    int vida = 2;
     // Start is called before the first frame update
     void Start()
     {
@@ -99,11 +100,20 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision collision)
-    {       
-        if (collision.gameObject.tag == "Player")
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
         {
-            Destroy(this.gameObject);
+            PlayerMovement myPlayer = other.GetComponent<PlayerMovement>();
+            //myPlayer.Hitted();
         }
+    }
+  
+
+    public void Hitted()
+    {
+        vida--;
+        if (vida <= 0)
+            Destroy(this.gameObject);
     }
 }
