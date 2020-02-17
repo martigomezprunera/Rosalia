@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     #region VARIABLES
-    int lifes;
+    int lifes=3;
 
     [Header("MOVEMENT")]
     float horizontalMove;
@@ -137,10 +137,9 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     #region HITTED
-    void Hitted()
+    public void Hitted()
     {
         lifes--;
-
         if (lifes <= 0)
         {
             DeathPlayer();
@@ -151,7 +150,7 @@ public class PlayerMovement : MonoBehaviour
     #region DEATH
     void DeathPlayer()
     {
-        Debug.Log("Player DEATH");
+        Destroy(this.gameObject);
     }
     #endregion
 

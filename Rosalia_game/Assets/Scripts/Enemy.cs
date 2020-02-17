@@ -20,7 +20,9 @@ public class Enemy : MonoBehaviour
     Rigidbody myRigidBody;
     bool stop = false;
     bool reset = false;
-    float countDownToAttack=1;
+    [SerializeField]
+    float countdownTime = 0.5f;
+    float countDownToAttack ;
     float countDownToReset = 0.5f;
     Coroutine myCoroutine;
     int vida = 2;
@@ -30,8 +32,8 @@ public class Enemy : MonoBehaviour
         pathfinder = GetComponent<NavMeshAgent>();
         myRigidBody = GetComponent<Rigidbody>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
-        myCoroutine = StartCoroutine(UpdatePath());       
-
+        myCoroutine = StartCoroutine(UpdatePath());
+        countDownToAttack = countdownTime;
     }
 
     // Update is called once per frame
@@ -71,7 +73,7 @@ public class Enemy : MonoBehaviour
                 if (countDownToAttack < 0)
                 {
                     ChargeAttack();
-                    countDownToAttack = 1;
+                    countDownToAttack = countdownTime;
                     stop = false;
                 }               
             }            
@@ -105,7 +107,7 @@ public class Enemy : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             PlayerMovement myPlayer = other.GetComponent<PlayerMovement>();
-            //myPlayer.Hitted();
+            myPlayer.Hitted();
         }
     }
   
@@ -113,6 +115,7 @@ public class Enemy : MonoBehaviour
     public void Hitted()
     {
         vida--;
+        Debug.Log(vida);
         if (vida <= 0)
             Destroy(this.gameObject);
     }
