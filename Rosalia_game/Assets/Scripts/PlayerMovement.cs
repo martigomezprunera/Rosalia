@@ -29,6 +29,9 @@ public class PlayerMovement : MonoBehaviour
     private int counterMoneyTake;
     private int counterMoney;
 
+    [Header("PARTICLES")]
+    [SerializeField] GameObject deathParticles;
+    [SerializeField] GameObject walkParticles;
     #endregion
 
     #region UPDATE
@@ -108,6 +111,13 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Dinero cogido" + counterMoneyTake);
             Debug.Log("Fardo siguiente" + counterMoney);
         }
+    }
+    #endregion
+
+    #region DEATH
+    void DeathPlayer()
+    {
+
     }
     #endregion
 
