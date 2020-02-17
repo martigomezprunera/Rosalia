@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     #region VARIABLES
+    int lifes;
+
     [Header("MOVEMENT")]
     float horizontalMove;
     float verticalMove;
@@ -134,10 +136,22 @@ public class PlayerMovement : MonoBehaviour
     }
     #endregion
 
+    #region HITTED
+    void Hitted()
+    {
+        lifes--;
+
+        if (lifes <= 0)
+        {
+            DeathPlayer();
+        }
+    }
+    #endregion
+
     #region DEATH
     void DeathPlayer()
     {
-
+        Debug.Log("Player DEATH");
     }
     #endregion
 
