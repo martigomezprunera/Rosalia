@@ -24,8 +24,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Camera mainCamera;
     private Vector3 camForward;
     private Vector3 camRight;
-    #endregion
 
+    [Header("RESPAWNMONEY")]
+    private int counterMoneyTake;
+    private int counterMoney;
+
+    #endregion
 
     #region UPDATE
     void Update()
@@ -93,4 +97,18 @@ public class PlayerMovement : MonoBehaviour
 
     }
     #endregion
+
+    #region OnTriggerStay
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.tag == "Fardo")
+        {
+            counterMoneyTake++;
+            counterMoney++;
+            Debug.Log("Dinero cogido" + counterMoneyTake);
+            Debug.Log("Fardo siguiente" + counterMoney);
+        }
+    }
+    #endregion
+
 }
