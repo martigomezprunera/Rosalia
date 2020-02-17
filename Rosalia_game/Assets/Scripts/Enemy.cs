@@ -129,7 +129,6 @@ public class Enemy : MonoBehaviour
     public void Hitted()
     {
         vida--;
-        Debug.Log(vida);
         if (vida <= 0)
             Destroy(this.gameObject);
     }
