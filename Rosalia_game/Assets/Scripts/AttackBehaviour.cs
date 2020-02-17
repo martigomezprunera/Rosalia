@@ -27,8 +27,7 @@ public class AttackBehaviour : MonoBehaviour
             Destroy(Instantiate(hitParticles,other.transform.position, Quaternion.identity), 1.5f);
 
             //MOVER AL ENEMIGO HACIA ATRÁS
-            other.transform.DOJump(other.transform.position + direction, 1.5f, 1, 1);
-            Debug.Log(direction);
+            other.transform.DOJump(other.transform.position + direction, 1.5f, 1, 1);            
         }
     }
 }
