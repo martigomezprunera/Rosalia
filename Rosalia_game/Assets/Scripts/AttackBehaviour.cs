@@ -33,7 +33,7 @@ public class AttackBehaviour : MonoBehaviour
 
             //Le haces daño
             Enemy attacked = other.GetComponent<Enemy>();
-            //attacked.Hitted();
+            attacked.Hitted();
         }
     }
 }
