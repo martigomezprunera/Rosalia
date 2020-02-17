@@ -105,3 +105,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 1000
+  pushForce: 5
+  hitParticles: {fileID: 3527879950749120157, guid: 7dbaed9f2386f0d4a9561c305c3f051b,
+    type: 3}

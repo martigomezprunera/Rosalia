@@ -4,12 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-<<<<<<< HEAD
   - Fardo
-=======
-  - Enemy
-  - PossibleSpawnMoney
-  - PossibleSpawnEnemy
   layers:
   - Default
   - TransparentFX
@@ -19,7 +14,7 @@ TagManager:
   - UI
   - 
   - 
-  - PostProcessing
+  - 
   - 
   - 
   - 

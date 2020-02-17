@@ -8,7 +8,8 @@ public class Attack : MonoBehaviour
     public enum Side
     {
         RIGHT,
-        LEFT
+        LEFT,
+        FRONT
     }
 
     [Header("TRANSFORMS")]
@@ -16,6 +17,7 @@ public class Attack : MonoBehaviour
     [SerializeField] Transform centreOfAttack;
     [SerializeField] Transform rightSpawner;
     [SerializeField] Transform leftSpawner;
+    [SerializeField] Transform frontSpawner;
 
     [SerializeField] PlayerMovement myPlayerMovement;
 
@@ -25,7 +27,7 @@ public class Attack : MonoBehaviour
     [SerializeField] float speedAttack;
     Quaternion lastRotation;
     float angleToRotate = 120;
-    Side sideAttack = Side.RIGHT;
+    Side sideAttack = Side.FRONT;
     bool canAttack = true;
 
 
@@ -81,7 +83,14 @@ public class Attack : MonoBehaviour
                         sideAttack = Side.RIGHT;
                         break;
                     }
-                default:
+                case Side.FRONT:
+                    {
+                        Destroy(Instantiate(attackObject, frontSpawner), speedAttack);
+                        attackObject.transform.SetParent(frontSpawner);
+
+                        break;
+                    }
+                        default:
                     {
                         Debug.Log("ALGO NO FUNCIONA");
                         break;

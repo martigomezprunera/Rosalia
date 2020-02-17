@@ -1,20 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class AttackBehaviour : MonoBehaviour
 {
     [SerializeField] float force;
+    [SerializeField] float pushForce;
+    [SerializeField] GameObject hitParticles;
+
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
         {
-            Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
+            ////PRIMERA ITERACIÓN ATAQUE
+            // Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
+            // rb.AddForce(new Vector3(0, force, 0));
+            // Debug.Log("Atacando");
 
-            rb.AddForce(new Vector3(0, force, 0));
+            Vector3 direction =  other.transform.position - this.transform.position ;
+            direction *= pushForce;
+            direction.y = 0;
 
-            Debug.Log("Atacando");
+            //PARTICLES SYSTEM HIT
+            Destroy(Instantiate(hitParticles,other.transform.position, Quaternion.identity), 1.5f);
+
+            //MOVER AL ENEMIGO HACIA ATRÁS
+            other.transform.DOJump(other.transform.position + direction, 1.5f, 1, 1);            
         }
     }
 }
