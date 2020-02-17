@@ -32,6 +32,9 @@ public class PlayerMovement : MonoBehaviour
     [Header("PARTICLES")]
     [SerializeField] GameObject deathParticles;
     [SerializeField] GameObject walkParticles;
+    [SerializeField] Transform spawnerWalkingParticles;
+    float walkingTimer;
+    [SerializeField] float maxTimeWalking;
     #endregion
 
     #region UPDATE
@@ -51,18 +54,35 @@ public class PlayerMovement : MonoBehaviour
             movePlayer = playerInput.x * camRight + playerInput.z * camForward;
             movePlayer *= playerSpeed;
 
-            if (!stopped)
+        if (movePlayer == new Vector3(0, 0, 0))
+        {
+            stopped = true;
+        }
+        else
+        {
+            stopped = false;
+        }
+        if (!stopped)
+        {
+            // CHARACTER ROTATION (LOOK AT)
+            player.transform.LookAt(player.transform.position + movePlayer);
+
+            // GRAVITY
+            SetGravity();
+
+            // MOVING CHARACTER
+            player.Move(movePlayer * Time.deltaTime);
+
+            walkingTimer += Time.deltaTime;
+
+            if (walkingTimer > maxTimeWalking)
             {
-                // CHARACTER ROTATION (LOOK AT)
-                player.transform.LookAt(player.transform.position + movePlayer);
-
-                // GRAVITY
-                SetGravity();
-
-                // MOVING CHARACTER
-                player.Move(movePlayer * Time.deltaTime);
-
+                walkingTimer = 0;
+                Destroy(Instantiate(walkParticles, spawnerWalkingParticles.position, Quaternion.identity ), 0.5f);
             }
+
+        }
+        
         
 
 
