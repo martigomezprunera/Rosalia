@@ -7,9 +7,11 @@ public class MoneyLogic : MonoBehaviour
 {
     #region VARIABLES
     [SerializeField] GameObject moneyParticles;
-    [SerializeField] Transform player;
+    Transform player;
     [SerializeField] float lifeTime;
     [SerializeField] float speedMoney;
+    [SerializeField] float currency;
+    MoneyManager moneManager;
 
     bool Idle = true;
     [Header("ANIMATION")]
@@ -24,6 +26,7 @@ public class MoneyLogic : MonoBehaviour
         timer = 0;
         player = GameObject.Find("Rosalia").transform;
         GoUp();
+        moneManager = GameObject.Find("MoneyManager").GetComponent<MoneyManager>();
     }
 
     #region UPDATE
@@ -61,12 +64,15 @@ public class MoneyLogic : MonoBehaviour
         }
     }
     #endregion
+
     #region TRIGGER ENTER
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             AddMoney();
+
+            Debug.Log("Score: " + moneManager.GetScore());
 
             Destroy(Instantiate(moneyParticles, this.transform.position, Quaternion.identity), 2f);
             Destroy(this.gameObject);
@@ -79,6 +85,8 @@ public class MoneyLogic : MonoBehaviour
     {
         ///LLAMAR A LA FUNCION DE GAME MANAGER PARA  AÑADIR DINERO
         Debug.Log("DINERO CONSEGUIDO");
+
+        moneManager.AddMoney(currency);
     }
     #endregion
 }

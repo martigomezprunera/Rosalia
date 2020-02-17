@@ -37,6 +37,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform spawnerWalkingParticles;
     float walkingTimer;
     [SerializeField] float maxTimeWalking;
+
+    [Header("MULTIPLIYER")]
+    [SerializeField] float multipliyerFactor;
+    float multipliyer = 1f;    
     #endregion
 
     #region UPDATE
@@ -151,6 +155,27 @@ public class PlayerMovement : MonoBehaviour
     void DeathPlayer()
     {
         Destroy(this.gameObject);
+    }
+    #endregion
+
+    #region INCREASE MULTIPLIYER
+    public void IncreaseMultipliyer()
+    {
+        multipliyer += multipliyerFactor;
+    }
+    #endregion
+
+    #region GET MULTIPLIYER
+    public float GetMultipliyer()
+    {
+        return multipliyer;
+    }
+    #endregion
+
+    #region RESTART MULTIPLAYER
+    public void RestartMultipliyer()
+    {
+        multipliyer = 1;
     }
     #endregion
 
