@@ -22,61 +22,75 @@ public class Enemy : MonoBehaviour
     bool reset = false;
     [SerializeField]
     float countdownTime = 0.5f;
+    [SerializeField]
+    int distanceToChase  = 10;
     float countDownToAttack ;
     float countDownToReset = 0.5f;
     Coroutine myCoroutine;
+    [SerializeField]
     int vida = 2;
+    bool chase = false;
     // Start is called before the first frame update
     void Start()
     {
         pathfinder = GetComponent<NavMeshAgent>();
         myRigidBody = GetComponent<Rigidbody>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
-        myCoroutine = StartCoroutine(UpdatePath());
         countDownToAttack = countdownTime;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (myType == TypeOfEnemy.CARGA)
+        if (chase)
         {
-            if (reset)
+            if (myType == TypeOfEnemy.CARGA)
             {
-                countDownToReset -= Time.deltaTime;
-                if (countDownToReset < 0)
+                if (reset)
                 {
-                    reset = false;
-                    countDownToReset = 0.5f;
-                    if (!(Vector3.Distance(target.position, this.transform.position) < 3))
+                    countDownToReset -= Time.deltaTime;
+                    if (countDownToReset < 0)
                     {
-                        pathfinder.isStopped = false;
-                        myCoroutine = StartCoroutine(UpdatePath());   
+                        reset = false;
+                        countDownToReset = 0.5f;
+                        if (!(Vector3.Distance(target.position, this.transform.position) < 3))
+                        {
+                            pathfinder.isStopped = false;
+                            myCoroutine = StartCoroutine(UpdatePath());
+                        }
+                        else
+                        {
+                            stop = true;
+                            auxTarget = target.position;
+                        }
                     }
-                    else
+                }
+                else if ((Vector3.Distance(target.position, this.transform.position) < distanceCanCharge) && !stop)
+                {
+                    StopCoroutine(myCoroutine);
+                    stop = true;
+                    pathfinder.isStopped = true;
+                    auxTarget = target.position;
+                }
+                else if (stop)
+                {
+                    countDownToAttack -= Time.deltaTime;
+                    if (countDownToAttack < 0)
                     {
-                        stop = true;
-                        auxTarget = target.position;
+                        ChargeAttack();
+                        countDownToAttack = countdownTime;
+                        stop = false;
                     }
                 }
             }
-            else if ((Vector3.Distance(target.position, this.transform.position) < distanceCanCharge) && !stop)
+        }
+        else
+        {
+            if (Vector3.Distance(target.position, this.transform.position) < distanceToChase)
             {
-                StopCoroutine(myCoroutine);
-                stop = true;
-                pathfinder.isStopped=true;
-                auxTarget = target.position;
+                chase = true;
+                myCoroutine = StartCoroutine(UpdatePath());
             }
-            else if (stop)
-            {
-                countDownToAttack -= Time.deltaTime;
-                if (countDownToAttack < 0)
-                {
-                    ChargeAttack();
-                    countDownToAttack = countdownTime;
-                    stop = false;
-                }               
-            }            
         }
     }  
 
