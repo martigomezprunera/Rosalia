@@ -130,8 +130,8 @@ public class PlayerMovement : MonoBehaviour
         {
             counterMoneyTake++;
             counterMoney++;
-            Debug.Log("Dinero cogido" + counterMoneyTake);
-            Debug.Log("Fardo siguiente" + counterMoney);
+            //Debug.Log("Dinero cogido" + counterMoneyTake);
+            //Debug.Log("Fardo siguiente" + counterMoney);
         }
     }
     #endregion

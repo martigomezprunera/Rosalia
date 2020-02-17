@@ -10,6 +10,11 @@ public class MoneyLogic : MonoBehaviour
     [SerializeField] Transform player;
     [SerializeField] float lifeTime;
     [SerializeField] float speedMoney;
+
+    bool Idle = true;
+    [Header("ANIMATION")]
+    [SerializeField] float timeFloating;
+    [SerializeField] float distanceFloating;
     float timer;
 
     #endregion
@@ -17,20 +22,45 @@ public class MoneyLogic : MonoBehaviour
     void Start()
     {
         timer = 0;
+        player = GameObject.Find("Rosalia").transform;
+        GoUp();
     }
 
-    
+    #region UPDATE
     void Update()
     {
         timer += Time.deltaTime;
 
         if (timer >= lifeTime)
         {
+            Idle = false;
             this.transform.DOMove(new Vector3(player.position.x - 1.5f, player.position.y, player.position.z) , speedMoney);
         }
 
     }
+    #endregion
 
+    #region GO UP
+    void GoUp()
+    {
+        if (Idle)
+        {
+            this.transform.DOMoveY(this.transform.position.y + distanceFloating, timeFloating);
+            Invoke("GoDown", timeFloating);
+        }        
+    }
+    #endregion
+
+    #region GO DOWN
+    void GoDown()
+    {
+        if (Idle)
+        {
+            this.transform.DOMoveY(this.transform.position.y - distanceFloating, timeFloating);
+            Invoke("GoUp", timeFloating);
+        }
+    }
+    #endregion
     #region TRIGGER ENTER
     private void OnTriggerEnter(Collider other)
     {
