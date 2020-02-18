@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -40,12 +41,17 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("MULTIPLIYER")]
     [SerializeField] float multipliyerFactor;
-    float multipliyer = 1f;    
+    float multipliyer = 1f;
+    bool onCombo = false;
+    [SerializeField] float maxTimeCombo;
+    float timeCombo = 0;
+    [SerializeField] Text multiplyText;
     #endregion
 
     #region UPDATE
     void Update()
     {
+        multiplyText.text = "x" + multipliyer;
             //GET AXIS
             horizontalMove = Input.GetAxis("Horizontal");
             verticalMove = Input.GetAxis("Vertical");
@@ -88,9 +94,18 @@ public class PlayerMovement : MonoBehaviour
             }
 
         }
-        
-        
 
+
+        if (onCombo)
+        {
+            timeCombo += Time.deltaTime;
+
+            if (timeCombo >= maxTimeCombo)
+            {
+                RestartMultipliyer();
+            }
+        }
+        
 
     }
 #endregion
@@ -162,6 +177,10 @@ public class PlayerMovement : MonoBehaviour
     public void IncreaseMultipliyer()
     {
         multipliyer += multipliyerFactor;
+        timeCombo = 0;
+        onCombo = true;
+        Debug.Log("Increasing Multipliyer");
+        Debug.Log("COMBO =    x" + multipliyer);
     }
     #endregion
 
@@ -176,6 +195,9 @@ public class PlayerMovement : MonoBehaviour
     public void RestartMultipliyer()
     {
         multipliyer = 1;
+        timeCombo = 0;
+        onCombo = false;
+        Debug.Log("RESTARTING COMBO" );
     }
     #endregion
 

@@ -24,7 +24,17 @@ public class FardoLogic : MonoBehaviour
     GameObject fajoSpawned3;
     GameObject fajoSpawned4;
 
+    PlayerMovement player;
+
     int life = 3;
+    #endregion
+
+
+    #region START
+    private void Start()
+    {
+        player = GameObject.Find("Rosalia").GetComponent<PlayerMovement>();
+    }
     #endregion
 
     #region HIT FARDO
@@ -49,6 +59,8 @@ public class FardoLogic : MonoBehaviour
 
             fajoSpawned4 = Instantiate(fajo, this.transform.position, Quaternion.identity) as GameObject;
             fajoSpawned4.transform.DOJump(spawner4.position, jumpSpawn, 1, speedSpawn);
+
+            player.IncreaseMultipliyer();
 
             Destroy(this.gameObject);
         }
