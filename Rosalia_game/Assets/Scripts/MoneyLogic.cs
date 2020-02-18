@@ -21,6 +21,7 @@ public class MoneyLogic : MonoBehaviour
 
     #endregion
 
+    #region START
     void Start()
     {
         timer = 0;
@@ -28,6 +29,7 @@ public class MoneyLogic : MonoBehaviour
         GoUp();
         moneManager = GameObject.Find("MoneyManager").GetComponent<MoneyManager>();
     }
+    #endregion
 
     #region UPDATE
     void Update()
@@ -72,8 +74,6 @@ public class MoneyLogic : MonoBehaviour
         {
             AddMoney();
 
-            Debug.Log("Score: " + moneManager.GetScore());
-
             Destroy(Instantiate(moneyParticles, this.transform.position, Quaternion.identity), 2f);
             Destroy(this.gameObject);
         }
@@ -84,8 +84,6 @@ public class MoneyLogic : MonoBehaviour
     void AddMoney()
     {
         ///LLAMAR A LA FUNCION DE GAME MANAGER PARA  AÑADIR DINERO
-        Debug.Log("DINERO CONSEGUIDO");
-
         moneManager.AddMoney(currency);
     }
     #endregion

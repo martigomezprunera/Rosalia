@@ -38,7 +38,6 @@ public class AttackBehaviour : MonoBehaviour
         else if (other.CompareTag("Fardo"))
         {
             FardoLogic fL = other.gameObject.GetComponent<FardoLogic>();
-            Debug.Log("FARDO GOLPEADO");
             fL.HitFardo();
         }
     }

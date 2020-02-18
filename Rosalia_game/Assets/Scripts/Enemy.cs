@@ -30,6 +30,8 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     int vida = 2;
     bool chase = false;
+
+    PlayerMovement player;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +39,8 @@ public class Enemy : MonoBehaviour
         myRigidBody = GetComponent<Rigidbody>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
         countDownToAttack = countdownTime;
+
+        player = GameObject.Find("Rosalia").GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
@@ -131,6 +135,9 @@ public class Enemy : MonoBehaviour
         vida--;
         Debug.Log(vida);
         if (vida <= 0)
+        {
+            player.IncreaseMultipliyer();
             Destroy(this.gameObject);
+        }
     }
 }
