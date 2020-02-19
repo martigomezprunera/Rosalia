@@ -9,7 +9,10 @@ public class MoneyRespawnManager : MonoBehaviour
     {
         
     }
-
+    public void newRound(int numRound)
+    {
+        Debug.Log("Spawn dinero de la ronda:" + numRound);
+    }
     // Update is called once per frame
     void Update()
     {
