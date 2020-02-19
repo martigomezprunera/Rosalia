@@ -11,13 +11,15 @@ public class GameManager : MonoBehaviour
     Coroutine myCoroutine;
     int numRound = 0;
     bool newRound = false;
+
     // Start is called before the first frame update
     void Start()
     {
         myEnemyManager = this.GetComponent<EnemySpawnManager>();
         myMoneyRespawnManager = this.GetComponent<MoneyRespawnManager>();
         Player = GameObject.FindGameObjectWithTag("Player");
-        StartNewRound();
+        //StartNewRound();
+        Invoke("StartNewRound", 3);
     }
 
     // Update is called once per frame
