@@ -18,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] CharacterController player;
     [SerializeField] float playerSpeed;
 
+    [SerializeField] Transform centre;
+
 
     [Header("GRAVITY")]
     [SerializeField] float gravity = 9.8f;
@@ -80,20 +82,7 @@ public class PlayerMovement : MonoBehaviour
 
 
         if (!stopped)
-        {
-            /// CHARACTER ROTATION (LOOK AT)
-            //player.transform.LookAt(player.transform.position + movePlayer);
-
-            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-            Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-            float rayDistance;
-
-            if (groundPlane.Raycast(ray, out rayDistance))
-            {
-                Vector3 point = ray.GetPoint(rayDistance);
-                point.y += 1.73f;
-                player.transform.LookAt(point);
-            }
+        {          
 
             // GRAVITY
             SetGravity();
@@ -121,8 +110,22 @@ public class PlayerMovement : MonoBehaviour
                 RestartMultipliyer();
             }
         }
-        
 
+
+        /// CHARACTER ROTATION (LOOK AT)
+        //player.transform.LookAt(player.transform.position + movePlayer);
+
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        float rayDistance;
+
+        if (groundPlane.Raycast(ray, out rayDistance))
+        {
+            Vector3 point = ray.GetPoint(rayDistance);
+            Debug.DrawLine(ray.origin, point, Color.red);
+            point.y += 4.75f;
+            player.transform.LookAt(point);
+        }        
     }
 #endregion
 
