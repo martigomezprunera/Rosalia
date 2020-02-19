@@ -123,7 +123,8 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector3 point = ray.GetPoint(rayDistance);
             Debug.DrawLine(ray.origin, point, Color.red);
-            point.y += 4.75f;
+            //point.y += 4.75f;
+            point.y = player.transform.position.y;
             player.transform.LookAt(point);
         }        
     }

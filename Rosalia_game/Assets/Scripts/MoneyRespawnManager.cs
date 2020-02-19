@@ -4,18 +4,58 @@ using UnityEngine;
 
 public class MoneyRespawnManager : MonoBehaviour
 {
+    //VARIABLES
+    GameObject[] possibleSpawnSites;
+    private int maxNumbers = 20;
+    private List<int> uniqueNumbers;
+    private List<int> finishedNumbers;
+
+    [SerializeField]
+    GameObject fajoDinero;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        uniqueNumbers = new List<int>();
+        finishedNumbers = new List<int>();
+        possibleSpawnSites = GameObject.FindGameObjectsWithTag("PossibleSpawnMoney");
+
+        //LLAMADA FUNCIÓN
+        GenerateRandomList();
     }
     public void newRound(int numRound)
     {
+        for(int i = 0; i < maxNumbers; i++)
+        {
+            Instantiate(fajoDinero, possibleSpawnSites[finishedNumbers[i]].transform.position, Quaternion.identity);
+        }
         Debug.Log("Spawn dinero de la ronda:" + numRound);
     }
+
     // Update is called once per frame
     void Update()
     {
-        
+        //Debug.Log("Numero de posibles sitios a spawnear" + possibleSpawnSites.Length);
+
+        /*for(int i = 0; i < finishedNumbers.Count; i++)
+        {
+            Debug.Log("Numero del array: " + finishedNumbers[i]);
+        }*/
+    }
+
+    //RANDOM ARRAY
+    public void GenerateRandomList()
+    {
+        for (int i = 0; i < 28; i++)
+        {
+            uniqueNumbers.Add(i);
+        }
+        for (int i = 0; i < maxNumbers; i++)
+        {
+            int ranNum = uniqueNumbers[Random.Range(1, uniqueNumbers.Count)];
+            finishedNumbers.Add(ranNum);
+            uniqueNumbers.Remove(ranNum);
+        }
     }
 }
+

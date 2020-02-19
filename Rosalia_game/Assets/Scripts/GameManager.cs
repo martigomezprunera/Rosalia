@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     Coroutine myCoroutine;
     int numRound = 0;
     bool newRound = false;
+
     // Start is called before the first frame update
     void Start()
     {
