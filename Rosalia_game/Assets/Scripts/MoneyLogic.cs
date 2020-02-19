@@ -8,6 +8,7 @@ public class MoneyLogic : MonoBehaviour
     #region VARIABLES
     [SerializeField] GameObject moneyParticles;
     Transform player;
+    PlayerMovement playerMovement;
     [SerializeField] float lifeTime;
     [SerializeField] float speedMoney;
     [SerializeField] float currency;
@@ -26,6 +27,8 @@ public class MoneyLogic : MonoBehaviour
     {
         timer = 0;
         player = GameObject.Find("Rosalia").transform;
+        playerMovement = GameObject.Find("Rosalia").GetComponent<PlayerMovement>();
+
         GoUp();
         moneManager = GameObject.Find("MoneyManager").GetComponent<MoneyManager>();
     }
@@ -85,6 +88,8 @@ public class MoneyLogic : MonoBehaviour
     {
         ///LLAMAR A LA FUNCION DE GAME MANAGER PARA  AÑADIR DINERO
         moneManager.AddMoney(currency);
+        ///RESTART TIME COMBO
+        playerMovement.RestartTimeCombo();
     }
     #endregion
 }

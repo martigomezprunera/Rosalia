@@ -51,21 +51,24 @@ public class PlayerMovement : MonoBehaviour
     #region UPDATE
     void Update()
     {
+        ///TEXT 
         multiplyText.text = "x" + multipliyer;
-            //GET AXIS
-            horizontalMove = Input.GetAxis("Horizontal");
-            verticalMove = Input.GetAxis("Vertical");
 
-            playerInput = new Vector3(horizontalMove, 0, verticalMove);
-            playerInput = Vector3.ClampMagnitude(playerInput, 1);
+        //GET AXIS
+        horizontalMove = Input.GetAxis("Horizontal");
+        verticalMove = Input.GetAxis("Vertical");
 
-            //GETTING CAMERA DIRECTION
-            CamDirection();
+        playerInput = new Vector3(horizontalMove, 0, verticalMove);
+        playerInput = Vector3.ClampMagnitude(playerInput, 1);
 
-            // CALCULATING CHARACTER MOVEMENT
-            movePlayer = playerInput.x * camRight + playerInput.z * camForward;
-            movePlayer *= playerSpeed;
+        //GETTING CAMERA DIRECTION
+        CamDirection();
 
+        // CALCULATING CHARACTER MOVEMENT
+        movePlayer = playerInput.x * camRight + playerInput.z * camForward;
+        movePlayer *= playerSpeed;
+
+        ///CHECKING IF IS STOPPED   
         if (movePlayer == new Vector3(0, 0, 0))
         {
             stopped = true;
@@ -74,10 +77,23 @@ public class PlayerMovement : MonoBehaviour
         {
             stopped = false;
         }
+
+
         if (!stopped)
         {
-            // CHARACTER ROTATION (LOOK AT)
-            player.transform.LookAt(player.transform.position + movePlayer);
+            /// CHARACTER ROTATION (LOOK AT)
+            //player.transform.LookAt(player.transform.position + movePlayer);
+
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+            float rayDistance;
+
+            if (groundPlane.Raycast(ray, out rayDistance))
+            {
+                Vector3 point = ray.GetPoint(rayDistance);
+                point.y += 1.73f;
+                player.transform.LookAt(point);
+            }
 
             // GRAVITY
             SetGravity();
@@ -95,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
-
+        ////CHECKING IF THE COMBO CONTINUES
         if (onCombo)
         {
             timeCombo += Time.deltaTime;
@@ -181,6 +197,13 @@ public class PlayerMovement : MonoBehaviour
         onCombo = true;
         Debug.Log("Increasing Multipliyer");
         Debug.Log("COMBO =    x" + multipliyer);
+    }
+    #endregion
+
+    #region RESTART TIME COMBO
+    public void RestartTimeCombo()
+    {
+        timeCombo = 0;
     }
     #endregion
 
