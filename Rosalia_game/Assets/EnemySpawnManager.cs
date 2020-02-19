@@ -9,12 +9,13 @@ public class EnemySpawnManager : MonoBehaviour
     public GameObject LittleEnemy;
 
     int costeRonda=0;
-    int dificultad = 2;
-    int EnemigoPequeño = 1;
-    int EnemigoNormal = 2;
-    int EnemigoGordo=4;
+    [SerializeField] int dificultad = 2;
 
-    float refreshRate = 0.1f;
+    [SerializeField] int CosteEnemigoPequeño = 1;
+    [SerializeField] int CosteEnemigoNormal = 2;
+    [SerializeField] int CosteEnemigoGordo = 4;
+
+    [SerializeField] float refreshRate = 4f;
     // Coste ronda = 16 + (k*numronda)
 
     public GameObject[] respawns;
@@ -22,36 +23,42 @@ public class EnemySpawnManager : MonoBehaviour
     void Start()
     {
         respawns = GameObject.FindGameObjectsWithTag("PossibleSpawnEnemy");
-        newRound(1);
+        newRound(5);
     }
 
     void newRound(int numRound)
     {
-        costeRonda = 16 + (numRound * dificultad);
+        costeRonda = 10 + (numRound * dificultad);
         StartCoroutine(spawnEnemies());
     }
 
     IEnumerator spawnEnemies()
     {
-        int aux = Random.Range(1, 3);
-        
-        switch (aux)
+        while (costeRonda > 0)
         {
-            case 1:
-                Debug.Log("Se instancia enemigo 1");
-                break;
-            case 2:
-                Debug.Log("Se instancia enemigo 2");
-                break;
-            case 3:
-                Debug.Log("Se instancia enemigo 3");
-                break;
-            default:
-                break;
+            int aux = Random.Range(1, 3);
+            int auxRandomPoint = Random.Range(0, 8);
+            switch (aux)
+            {
+                case 1:
+                    Instantiate(NormalEnemy, respawns[auxRandomPoint].transform.position, respawns[auxRandomPoint].transform.rotation);
+                    costeRonda -= CosteEnemigoNormal;
+                    break;
+                case 2:
+                    Instantiate(LittleEnemy, respawns[auxRandomPoint].transform.position, respawns[auxRandomPoint].transform.rotation);
+                    costeRonda -= CosteEnemigoPequeño;
+                    break;
+                case 3:
+                    Instantiate(FatEnemy, respawns[auxRandomPoint].transform.position, respawns[auxRandomPoint].transform.rotation);
+                    costeRonda -= CosteEnemigoGordo;
+                    break;
+                default:
+                    break;
+            }
+
+            //Instantiate(respawnPrefab, respawn.transform.position, respawn.transform.rotation);
+            Debug.Log("Coste actual = "+costeRonda);
+            yield return new WaitForSeconds(refreshRate);
         }
-
-        //Instantiate(respawnPrefab, respawn.transform.position, respawn.transform.rotation);
-
-        yield return new WaitForSeconds(2);
     }
 }
