@@ -42,32 +42,35 @@ public class EnemySpawnManager : MonoBehaviour
             int aux = Random.Range(1, 3);
             int auxRandomPoint = Random.Range(0, 8);
             Enemy myEnem;
-            switch (aux)
+            Debug.Log("Ha entrado en enemyR =" + auxRandomPoint);
+            if (respawns.Length > 0)
             {
-                case 1:                    
-                    myEnem = Instantiate(NormalEnemy, respawns[auxRandomPoint].transform.position, respawns[auxRandomPoint].transform.rotation).GetComponent<Enemy>();
-                    costeRonda -= CosteEnemigoNormal;
-                    if (Random.Range(0, 2) % 2 == 0)
-                        myEnem.myType = Enemy.TypeOfEnemy.CARGA;
-                    else
-                        myEnem.myType = Enemy.TypeOfEnemy.NORMAL;
-                    break;
-                case 2:
-                    myEnem = Instantiate(LittleEnemy, respawns[auxRandomPoint].transform.position, respawns[auxRandomPoint].transform.rotation).GetComponent<Enemy>();
-                    costeRonda -= CosteEnemigoPequeño;
-                    if (Random.Range(0, 2) % 2 == 0)
-                        myEnem.myType = Enemy.TypeOfEnemy.CARGA;
-                    else
-                        myEnem.myType = Enemy.TypeOfEnemy.NORMAL;
-                    break;
-                case 3:
-                    Instantiate(FatEnemy, respawns[auxRandomPoint].transform.position, respawns[auxRandomPoint].transform.rotation);
-                    costeRonda -= CosteEnemigoGordo;
-                    break;
-                default:
-                    break;
+                switch (aux)
+                {
+                    case 1:
+                        myEnem = Instantiate(NormalEnemy, respawns[auxRandomPoint].transform.position, respawns[auxRandomPoint].transform.rotation).GetComponent<Enemy>();
+                        costeRonda -= CosteEnemigoNormal;
+                        if (Random.Range(0, 2) % 2 == 0)
+                            myEnem.myType = Enemy.TypeOfEnemy.CARGA;
+                        else
+                            myEnem.myType = Enemy.TypeOfEnemy.NORMAL;
+                        break;
+                    case 2:
+                        myEnem = Instantiate(LittleEnemy, respawns[auxRandomPoint].transform.position, respawns[auxRandomPoint].transform.rotation).GetComponent<Enemy>();
+                        costeRonda -= CosteEnemigoPequeño;
+                        if (Random.Range(0, 2) % 2 == 0)
+                            myEnem.myType = Enemy.TypeOfEnemy.CARGA;
+                        else
+                            myEnem.myType = Enemy.TypeOfEnemy.NORMAL;
+                        break;
+                    case 3:
+                        Instantiate(FatEnemy, respawns[auxRandomPoint].transform.position, respawns[auxRandomPoint].transform.rotation);
+                        costeRonda -= CosteEnemigoGordo;
+                        break;
+                    default:
+                        break;
+                }
             }
-
             yield return new WaitForSeconds(refreshRate);
         }
     }
