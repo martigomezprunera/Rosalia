@@ -37,7 +37,8 @@ public class Enemy : MonoBehaviour
     {
         pathfinder = GetComponent<NavMeshAgent>();
         myRigidBody = GetComponent<Rigidbody>();
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        if(GameObject.FindGameObjectWithTag("Player")!=null)
+            target = GameObject.FindGameObjectWithTag("Player").transform;
         countDownToAttack = countdownTime;
 
         player = GameObject.Find("Rosalia").GetComponent<PlayerMovement>();
