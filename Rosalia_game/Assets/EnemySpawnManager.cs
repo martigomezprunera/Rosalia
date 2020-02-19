@@ -9,6 +9,7 @@ public class EnemySpawnManager : MonoBehaviour
     public GameObject LittleEnemy;
 
     int costeRonda=0;
+    Coroutine myCoroutine;
     [SerializeField] int dificultad = 2;
 
     [SerializeField] int CosteEnemigoPequeño = 1;
@@ -23,13 +24,15 @@ public class EnemySpawnManager : MonoBehaviour
     void Start()
     {
         respawns = GameObject.FindGameObjectsWithTag("PossibleSpawnEnemy");
-        newRound(3);
     }
 
-    void newRound(int numRound)
+    
+    public void newRound(int numRound)
     {
+        if (myCoroutine != null)
+            StopCoroutine(myCoroutine);
         costeRonda = 10 + (numRound * dificultad);
-        StartCoroutine(spawnEnemies());
+        myCoroutine = StartCoroutine(spawnEnemies());
     }
 
     IEnumerator spawnEnemies()
@@ -65,8 +68,6 @@ public class EnemySpawnManager : MonoBehaviour
                     break;
             }
 
-            //Instantiate(respawnPrefab, respawn.transform.position, respawn.transform.rotation);
-            Debug.Log("Coste actual = "+costeRonda);
             yield return new WaitForSeconds(refreshRate);
         }
     }
