@@ -16,6 +16,8 @@ public class MoneyLogic : MonoBehaviour
 
     bool Idle = true;
     [Header("ANIMATION")]
+
+    [SerializeField] float timeToStart;
     [SerializeField] float timeFloating;
     [SerializeField] float distanceFloating;
     float timer;
@@ -29,7 +31,7 @@ public class MoneyLogic : MonoBehaviour
         player = GameObject.Find("Rosalia").transform;
         playerMovement = GameObject.Find("Rosalia").GetComponent<PlayerMovement>();
 
-        GoUp();
+        Invoke("GoUp", timeToStart);
         moneManager = GameObject.Find("MoneyManager").GetComponent<MoneyManager>();
     }
     #endregion
