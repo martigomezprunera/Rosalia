@@ -384,6 +384,12 @@ Transform:
   m_Father: {fileID: 534690001}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &268025348 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2553629198768723788, guid: f9b12fdb9a13c904bab12435b6dad81a,
+    type: 3}
+  m_PrefabInstance: {fileID: 2553629199110351987}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &275270634
 GameObject:
   m_ObjectHideFlags: 0
@@ -1339,6 +1345,11 @@ PrefabInstance:
       propertyPath: comboEffect
       value: 
       objectReference: {fileID: 101130, guid: d7bf18dd20422304ea868e95c3518f19, type: 3}
+    - target: {fileID: 2870322066322919178, guid: 99ec356fc592ef049b5bec5d1b712f96,
+        type: 3}
+      propertyPath: myGameManager
+      value: 
+      objectReference: {fileID: 1061901667}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99ec356fc592ef049b5bec5d1b712f96, type: 3}
 --- !u!4 &418013312 stripped
@@ -4121,6 +4132,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1009238406}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1061901667 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2553629200799114675, guid: f9b12fdb9a13c904bab12435b6dad81a,
+    type: 3}
+  m_PrefabInstance: {fileID: 2553629199110351987}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1116674347
 GameObject:
   m_ObjectHideFlags: 0
@@ -8043,6 +8060,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2553629200799114674, guid: f9b12fdb9a13c904bab12435b6dad81a,
+        type: 3}
+      propertyPath: MyCanvas
+      value: 
+      objectReference: {fileID: 268025348}
+    - target: {fileID: 2553629200799114678, guid: f9b12fdb9a13c904bab12435b6dad81a,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2553629200799114678, guid: f9b12fdb9a13c904bab12435b6dad81a,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.339
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9b12fdb9a13c904bab12435b6dad81a, type: 3}

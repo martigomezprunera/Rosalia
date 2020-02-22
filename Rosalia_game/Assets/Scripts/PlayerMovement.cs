@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("PLAYER")]
     int lifes=3;
     [SerializeField] GameObject hitParticles;
+    [SerializeField] GameObject myGameManager;
     [SerializeField] Text lifeText;
 
     [Header("MOVEMENT")]
@@ -195,6 +196,7 @@ public class PlayerMovement : MonoBehaviour
     void DeathPlayer()
     {
         Destroy(Instantiate(deathParticles, this.transform.position, Quaternion.identity),2);
+        myGameManager.GetComponent<GameManager>().GameOver();
         Destroy(this.gameObject);
     }
     #endregion
