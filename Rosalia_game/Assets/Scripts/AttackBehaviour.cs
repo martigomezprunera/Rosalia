@@ -11,7 +11,7 @@ public class AttackBehaviour : MonoBehaviour
     [SerializeField] float pushForce;
     [SerializeField] GameObject hitParticles;
     [SerializeField] GameObject effectParticles;
-
+    [SerializeField] AudioSource attack;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -36,6 +36,8 @@ public class AttackBehaviour : MonoBehaviour
             //Le haces daño
             Enemy attacked = other.GetComponent<Enemy>();
             attacked.Hitted();
+
+            attack.Play();
         }
         else if (other.CompareTag("Fardo"))
         {

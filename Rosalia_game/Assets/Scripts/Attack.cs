@@ -29,6 +29,7 @@ public class Attack : MonoBehaviour
     float angleToRotate = 120;
     Side sideAttack = Side.FRONT;
     bool canAttack = true;
+    [SerializeField] AudioSource attack;
 
 
     #region UPDATE
@@ -87,6 +88,7 @@ public class Attack : MonoBehaviour
                     {
                         Destroy(Instantiate(attackObject, frontSpawner), speedAttack);
                         attackObject.transform.SetParent(frontSpawner);
+                        attack.Play();
 
                         break;
                     }

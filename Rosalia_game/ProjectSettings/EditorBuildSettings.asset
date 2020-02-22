@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MartiScene.unity
     guid: fe1fa087e7d1b9d419a8cdbb7871ca03
   - enabled: 1
-    path: Assets/Scenes/SceneGame.unity
-    guid: 1f1fc522a2ed3044a82935c4d53207f9
+    path: Assets/Scenes/IgnacioScene.unity
+    guid: 0872c616de4ae064eaadf83eb6c2da23
   m_configObjects: {}

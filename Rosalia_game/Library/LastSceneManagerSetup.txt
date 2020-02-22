@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/IgnacioScene.unity
+- path: Assets/Scenes/MartiScene.unity
   isLoaded: 1
   isActive: 1

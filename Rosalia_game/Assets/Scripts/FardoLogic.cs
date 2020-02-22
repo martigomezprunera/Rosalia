@@ -19,6 +19,9 @@ public class FardoLogic : MonoBehaviour
     [SerializeField] float speedSpawn;
     [SerializeField] float jumpSpawn;
 
+    [Header("AUDIO")]
+    [SerializeField] AudioSource destroyFardoAudio;
+
     GameObject fajoSpawned1;
     GameObject fajoSpawned2;
     GameObject fajoSpawned3;
@@ -62,6 +65,7 @@ public class FardoLogic : MonoBehaviour
 
             player.IncreaseMultipliyer();
 
+            destroyFardoAudio.Play();
             Destroy(this.gameObject);
         }
     }

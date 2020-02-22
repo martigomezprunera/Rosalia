@@ -52,6 +52,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform comboSpawner;
     bool turnOnParticlesCombo = false;
     GameObject particlesCombo;
+
+    [Header("AUDIO")]
+    [SerializeField] AudioSource death;
+    [SerializeField] AudioSource footstep;
+
+    [Header("PauseMenu")]
+    [SerializeField] PauseMenu pause;
     #endregion
 
     #region UPDATE
@@ -100,6 +107,7 @@ public class PlayerMovement : MonoBehaviour
             if (walkingTimer > maxTimeWalking)
             {
                 walkingTimer = 0;
+                footstep.Play();
                 Destroy(Instantiate(walkParticles, spawnerWalkingParticles.position, Quaternion.identity ), 0.5f);
             }
 
@@ -197,6 +205,8 @@ public class PlayerMovement : MonoBehaviour
     {
         Destroy(Instantiate(deathParticles, this.transform.position, Quaternion.identity),2);
         myGameManager.GetComponent<GameManager>().GameOver();
+        death.Play();
+
         Destroy(this.gameObject);
     }
     #endregion
