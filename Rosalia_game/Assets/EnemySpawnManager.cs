@@ -42,7 +42,6 @@ public class EnemySpawnManager : MonoBehaviour
             int aux = Random.Range(1, 3);
             int auxRandomPoint = Random.Range(0, 8);
             Enemy myEnem;
-            Debug.Log("Ha entrado en enemyR =" + auxRandomPoint);
             if (respawns.Length > 0)
             {
                 switch (aux)
