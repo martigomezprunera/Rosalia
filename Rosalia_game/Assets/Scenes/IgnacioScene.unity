@@ -1272,7 +1272,7 @@ PrefabInstance:
     - target: {fileID: 2870322066322919180, guid: 99ec356fc592ef049b5bec5d1b712f96,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.88
+      value: 4.57
       objectReference: {fileID: 0}
     - target: {fileID: 2870322066322919180, guid: 99ec356fc592ef049b5bec5d1b712f96,
         type: 3}
@@ -3042,6 +3042,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 752684529}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &754442932 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6001169854523845593, guid: 1484313afb0ee2c4daf4091af9642ba7,
+    type: 3}
+  m_PrefabInstance: {fileID: 2047357300}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &755354530
 GameObject:
   m_ObjectHideFlags: 0
@@ -4344,6 +4350,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2553629199110351987}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1110770572 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2870322066322919178, guid: 99ec356fc592ef049b5bec5d1b712f96,
+    type: 3}
+  m_PrefabInstance: {fileID: 418013311}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59bfae448a8c92840b7414827622ebb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1116674347
 GameObject:
   m_ObjectHideFlags: 0
@@ -7932,7 +7950,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1110770572}
     - target: {fileID: 1663263669066460754, guid: 0e82281316211e247b4a4d6bb434ff5b,
         type: 3}
       propertyPath: scoreText
@@ -8337,6 +8355,11 @@ PrefabInstance:
       propertyPath: gameAudio
       value: 
       objectReference: {fileID: 1061901667}
+    - target: {fileID: 6001169854523845593, guid: 1484313afb0ee2c4daf4091af9642ba7,
+        type: 3}
+      propertyPath: m_TagString
+      value: PauseMenu
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1484313afb0ee2c4daf4091af9642ba7, type: 3}
 --- !u!1 &2066499168
@@ -8522,7 +8545,7 @@ PrefabInstance:
     - target: {fileID: 2553629200799114675, guid: f9b12fdb9a13c904bab12435b6dad81a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2553629200799114672, guid: f9b12fdb9a13c904bab12435b6dad81a,
         type: 3}
@@ -8584,20 +8607,30 @@ PrefabInstance:
       propertyPath: MyCanvas
       value: 
       objectReference: {fileID: 268025348}
+    - target: {fileID: 2553629200799114674, guid: f9b12fdb9a13c904bab12435b6dad81a,
+        type: 3}
+      propertyPath: MyPauseMenu
+      value: 
+      objectReference: {fileID: 754442932}
     - target: {fileID: 2553629200799114678, guid: f9b12fdb9a13c904bab12435b6dad81a,
         type: 3}
       propertyPath: m_PlayOnAwake
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2553629200799114678, guid: f9b12fdb9a13c904bab12435b6dad81a,
         type: 3}
       propertyPath: m_Volume
-      value: 0.339
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2553629200799114678, guid: f9b12fdb9a13c904bab12435b6dad81a,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2553629200799114673, guid: f9b12fdb9a13c904bab12435b6dad81a,
+        type: 3}
+      propertyPath: refreshRate
+      value: 2.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9b12fdb9a13c904bab12435b6dad81a, type: 3}

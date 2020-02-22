@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     Coroutine myCoroutine;
     public GameObject textTochange;
     public GameObject MyCanvas;
+    public GameObject MyPauseMenu;
     MoneyManager myMoneyManager;
 
     int numRound = 0;
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1.0f;
         myEnemyManager = this.GetComponent<EnemySpawnManager>();
         myMoneyRespawnManager = this.GetComponent<MoneyRespawnManager>();
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -31,6 +33,7 @@ public class GameManager : MonoBehaviour
         Invoke("StartNewRound", 3);
         myMoneyManager = GameObject.FindGameObjectWithTag("MoneyManager").GetComponent<MoneyManager>();
         textTochange.GetComponent<Text>().text = myMoneyManager.GetScore().ToString();
+
     }
 
     // Update is called once per frame
@@ -58,7 +61,8 @@ public class GameManager : MonoBehaviour
             }
             if (!audio.isPlaying)
             {
-                GameOver();
+                if(!MyPauseMenu.active)
+                    GameOver();
             }
         }
     }

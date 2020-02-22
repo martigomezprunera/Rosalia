@@ -11,6 +11,7 @@ public class FollowCharacter : MonoBehaviour
     [SerializeField] float maxDistance;
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         mainCamera.LookAt(this.transform.position);
     }
 
