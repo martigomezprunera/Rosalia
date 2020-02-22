@@ -7,6 +7,7 @@ using DG.Tweening;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] GameObject deathParticles;
     public enum TypeOfEnemy {NORMAL, CARGA};
 
     public TypeOfEnemy myType;
@@ -137,6 +138,7 @@ public class Enemy : MonoBehaviour
         if (vida <= 0)
         {
             player.IncreaseMultipliyer();
+            Destroy(Instantiate(deathParticles, this.transform.position, Quaternion.identity), 3f);
             Destroy(this.gameObject);
         }
     }

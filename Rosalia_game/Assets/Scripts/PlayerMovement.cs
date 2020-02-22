@@ -6,24 +6,23 @@ using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
     #region VARIABLES
+    [Header("PLAYER")]
     int lifes=3;
+    [SerializeField] GameObject hitParticles;
+    [SerializeField] Text lifeText;
 
     [Header("MOVEMENT")]
     float horizontalMove;
     float verticalMove;
     private Vector3 playerInput;
-    public Vector3 movePlayer;
+    [HideInInspector] public Vector3 movePlayer;
     private bool stopped = false;
-
     [SerializeField] CharacterController player;
     [SerializeField] float playerSpeed;
 
-    [SerializeField] Transform centre;
-
-
     [Header("GRAVITY")]
     [SerializeField] float gravity = 9.8f;
-    [SerializeField] float fallVelocity;
+    float fallVelocity;
 
     [Header("CAMERA")]
     [SerializeField] Camera mainCamera;
@@ -48,6 +47,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float maxTimeCombo;
     float timeCombo = 0;
     [SerializeField] Text multiplyText;
+    [SerializeField] GameObject comboEffect;
+    [SerializeField] Transform comboSpawner;
+    bool turnOnParticlesCombo = false;
+    GameObject particlesCombo;
     #endregion
 
     #region UPDATE
@@ -55,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
     {
         ///TEXT 
         multiplyText.text = "x" + multipliyer;
+        lifeText.text = "Lifes:    " + lifes;
 
         //GET AXIS
         horizontalMove = Input.GetAxis("Horizontal");
@@ -178,6 +182,7 @@ public class PlayerMovement : MonoBehaviour
     #region HITTED
     public void Hitted()
     {
+        Destroy(Instantiate(hitParticles, this.transform.position, Quaternion.identity), 2f);
         lifes--;
         if (lifes <= 0)
         {
@@ -189,6 +194,7 @@ public class PlayerMovement : MonoBehaviour
     #region DEATH
     void DeathPlayer()
     {
+        Destroy(Instantiate(deathParticles, this.transform.position, Quaternion.identity),2);
         Destroy(this.gameObject);
     }
     #endregion
@@ -199,8 +205,13 @@ public class PlayerMovement : MonoBehaviour
         multipliyer += multipliyerFactor;
         timeCombo = 0;
         onCombo = true;
-        Debug.Log("Increasing Multipliyer");
-        Debug.Log("COMBO =    x" + multipliyer);
+
+        if (multipliyer >= 2 && !turnOnParticlesCombo)
+        {
+            turnOnParticlesCombo = true;
+            particlesCombo = Instantiate(comboEffect, comboSpawner.position, Quaternion.identity) as GameObject;
+            particlesCombo.transform.SetParent(this.transform);
+        }
     }
     #endregion
 
@@ -221,10 +232,11 @@ public class PlayerMovement : MonoBehaviour
     #region RESTART MULTIPLAYER
     public void RestartMultipliyer()
     {
+        Destroy(particlesCombo);
         multipliyer = 1;
         timeCombo = 0;
         onCombo = false;
-        Debug.Log("RESTARTING COMBO" );
+        turnOnParticlesCombo = false;
     }
     #endregion
 

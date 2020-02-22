@@ -107,11 +107,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0317c25c038d36742bb1efc74fe7387f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathParticles: {fileID: 352767319537627454, guid: 78ff3ad36c3e1ef47b055106583a8a52,
+    type: 3}
   myType: 0
   distanceCanCharge: 5
   countdownTime: 0.5
   distanceToChase: 10
-  vida: 2
+  vida: 3
 --- !u!195 &7180618621279210713
 NavMeshAgent:
   m_ObjectHideFlags: 0
