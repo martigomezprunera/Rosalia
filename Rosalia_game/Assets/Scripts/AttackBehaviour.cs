@@ -10,6 +10,7 @@ public class AttackBehaviour : MonoBehaviour
     [SerializeField] float force;
     [SerializeField] float pushForce;
     [SerializeField] GameObject hitParticles;
+    [SerializeField] GameObject effectParticles;
 
 
     private void OnTriggerEnter(Collider other)
@@ -27,6 +28,7 @@ public class AttackBehaviour : MonoBehaviour
 
             //PARTICLES SYSTEM HIT
             Destroy(Instantiate(hitParticles,other.transform.position, Quaternion.identity), 1.5f);
+            Destroy(Instantiate(effectParticles, other.transform.position, Quaternion.identity), 1.5f);
 
             //MOVER AL ENEMIGO HACIA ATRÁS
             other.transform.DOJump(other.transform.position + direction, 1.5f, 1, 1);
