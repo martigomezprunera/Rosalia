@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - FxTemporaire
   - EnemySpawnManager
+  - MoneyManager
   layers:
   - Default
   - TransparentFX
