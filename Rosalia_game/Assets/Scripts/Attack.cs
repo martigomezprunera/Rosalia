@@ -87,7 +87,7 @@ public class Attack : MonoBehaviour
                 case Side.FRONT:
                     {
                         Destroy(Instantiate(attackObject, frontSpawner), speedAttack);
-                        attackObject.transform.SetParent(frontSpawner);
+                        //attackObject.transform.SetParent(frontSpawner);
                         attack.Play();
 
                         break;

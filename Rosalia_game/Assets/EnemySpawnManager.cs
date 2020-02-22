@@ -39,7 +39,7 @@ public class EnemySpawnManager : MonoBehaviour
     {
         while (costeRonda > 0)
         {
-            int aux = Random.Range(1, 3);
+            int aux = Random.Range(1, 4);
             int auxRandomPoint = Random.Range(0, 8);
             Enemy myEnem;
             if (respawns.Length > 0)
