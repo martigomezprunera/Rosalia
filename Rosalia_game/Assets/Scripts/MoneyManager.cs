@@ -18,7 +18,6 @@ public class MoneyManager : MonoBehaviour
     public void AddMoney(float currency)
     {
         moneyScore += (currency * player.GetMultipliyer());
-        Debug.Log("Current Money:    " + moneyScore);
     }
 
     public float GetScore()

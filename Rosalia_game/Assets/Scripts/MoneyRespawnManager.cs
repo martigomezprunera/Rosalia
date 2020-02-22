@@ -53,14 +53,11 @@ public class MoneyRespawnManager : MonoBehaviour
     public void newRound(int numRound)
     {
         //COMPROBACIONES
-        Debug.Log("Numero de posibles sitios a spawnear " + possibleSpawnSites.Length);
-        Debug.Log("Numeros dentro del array: " + finishedNumbers.Count);
 
         for (int i = 0; i < finishedNumbers.Count; i++)
         {
             Instantiate(fajoDinero, possibleSpawnSites[finishedNumbers[i]].transform.position, Quaternion.identity);
         }
-        Debug.Log("Spawn dinero de la ronda:" + numRound);
     }
 
 }
